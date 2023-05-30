@@ -1,0 +1,6 @@
+framework module Pods_Deep_Dive_Part_2 {
+  umbrella header "Pods-Deep Dive Part 2-umbrella.h"
+
+  export *
+  module * { export * }
+}
