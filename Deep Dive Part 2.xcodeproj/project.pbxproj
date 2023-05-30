@@ -15,7 +15,6 @@
 		06A59A702A25CAA300F4CAA5 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 06A59A6E2A25CAA300F4CAA5 /* LaunchScreen.storyboard */; };
 		06A59A782A25E0E400F4CAA5 /* Cell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A59A772A25E0E400F4CAA5 /* Cell.swift */; };
 		06A59A7A2A25F1E600F4CAA5 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 06A59A792A25F1E600F4CAA5 /* SecondViewController.swift */; };
-		B72E4AED0FC27041F6787DFE /* Pods_Deep_Dive_Part_2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC6A2F44FFBBAA814A5B3C08 /* Pods_Deep_Dive_Part_2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,9 +28,6 @@
 		06A59A712A25CAA300F4CAA5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		06A59A772A25E0E400F4CAA5 /* Cell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Cell.swift; sourceTree = "<group>"; };
 		06A59A792A25F1E600F4CAA5 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
-		554C2065A7FB449DCE3DC5A1 /* Pods-Deep Dive Part 2.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deep Dive Part 2.debug.xcconfig"; path = "Target Support Files/Pods-Deep Dive Part 2/Pods-Deep Dive Part 2.debug.xcconfig"; sourceTree = "<group>"; };
-		DC6A2F44FFBBAA814A5B3C08 /* Pods_Deep_Dive_Part_2.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Deep_Dive_Part_2.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		EB254EB1E0FA2C35A25F90FD /* Pods-Deep Dive Part 2.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Deep Dive Part 2.release.xcconfig"; path = "Target Support Files/Pods-Deep Dive Part 2/Pods-Deep Dive Part 2.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,7 +35,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B72E4AED0FC27041F6787DFE /* Pods_Deep_Dive_Part_2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +46,6 @@
 			children = (
 				06A59A622A25CAA200F4CAA5 /* Deep Dive Part 2 */,
 				06A59A612A25CAA200F4CAA5 /* Products */,
-				7FC9A940642F2933C83D518C /* Pods */,
-				13A00AC0C5A13C81E921A7F6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -80,23 +73,6 @@
 			path = "Deep Dive Part 2";
 			sourceTree = "<group>";
 		};
-		13A00AC0C5A13C81E921A7F6 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				DC6A2F44FFBBAA814A5B3C08 /* Pods_Deep_Dive_Part_2.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		7FC9A940642F2933C83D518C /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				554C2065A7FB449DCE3DC5A1 /* Pods-Deep Dive Part 2.debug.xcconfig */,
-				EB254EB1E0FA2C35A25F90FD /* Pods-Deep Dive Part 2.release.xcconfig */,
-			);
-			path = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -104,7 +80,6 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 06A59A742A25CAA300F4CAA5 /* Build configuration list for PBXNativeTarget "Deep Dive Part 2" */;
 			buildPhases = (
-				51E12E8C3141C56C9E1EB809 /* [CP] Check Pods Manifest.lock */,
 				06A59A5C2A25CAA200F4CAA5 /* Sources */,
 				06A59A5D2A25CAA200F4CAA5 /* Frameworks */,
 				06A59A5E2A25CAA200F4CAA5 /* Resources */,
@@ -163,31 +138,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		51E12E8C3141C56C9E1EB809 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-Deep Dive Part 2-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		06A59A5C2A25CAA200F4CAA5 /* Sources */ = {
@@ -340,7 +290,6 @@
 		};
 		06A59A752A25CAA300F4CAA5 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 554C2065A7FB449DCE3DC5A1 /* Pods-Deep Dive Part 2.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -372,7 +321,6 @@
 		};
 		06A59A762A25CAA300F4CAA5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = EB254EB1E0FA2C35A25F90FD /* Pods-Deep Dive Part 2.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
