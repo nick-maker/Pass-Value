@@ -7,8 +7,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, deleteCellDelegate {
     
     var tableView: UITableView = {
         let tableView = UITableView()
@@ -42,6 +41,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.reuseIdentifier, for: indexPath) as? Cell else { fatalError("Cannot Downcasting") }
         cell.label.text = textArray[indexPath.row]
         cell.button.setTitle("Delete", for: .normal)
+        cell.delegate = self
         return cell
     }
     
@@ -49,19 +49,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         textArray.count
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//           rowSelected = indexPath.row
+//           clickToUpdate = textArray[indexPath.row]
+//           clickToPush()
+//       }
+    
     func setupNavigation() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(push))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToPush))
     }
     
-    @objc func push() {
+    @objc func addToPush() {
         let secondVC = SecondViewController()
         secondVC.view.backgroundColor = .white
         navigationController?.pushViewController(secondVC, animated: true)
     }
     
+    func deleteCell(at indexPath: IndexPath) {
+        textArray.remove(at: indexPath.row)
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
     
-    
+    func deleteCell(cell: Cell) {
+        guard let indexPath = tableView.indexPath(for: cell) else { return }
+        textArray.remove(at: indexPath.row)
+        tableView.reloadData()
+        
+    }
 
 
 }

@@ -22,6 +22,8 @@ class Cell: UITableViewCell {
         return button
     }()
     
+    weak var delegate: deleteCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
@@ -35,11 +37,19 @@ class Cell: UITableViewCell {
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
         ])
-
+        
+        button.addAction(UIAction(handler: { [weak self] _ in
+            guard let self = self else { return }
+            self.delegate?.deleteCell(cell: self)
+        }), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
+}
+
+protocol deleteCellDelegate: AnyObject {
+    func deleteCell(cell: Cell)
 }
