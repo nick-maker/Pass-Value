@@ -75,7 +75,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 self.tableView.reloadData()
             }
         }
-        secondVC.textField.text = clickToUpdate
         navigationController?.pushViewController(secondVC, animated: true)
     }
     
