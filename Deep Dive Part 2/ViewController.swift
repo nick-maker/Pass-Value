@@ -7,18 +7,18 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, updateTextProtocol {
     
     var tableView: UITableView = {
         let tableView = UITableView()
         tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = UITableView.automaticDimension        
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
     var textArray = ["2", "3", "4", "5"]
-   
+    var clickToUpdate = ""
+    var rowSelected = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,18 +52,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func setupNavigation() {
-        
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToPush))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        rowSelected = indexPath.row
+        clickToUpdate = textArray[indexPath.row]
         clickToPush()
-    }
-    
-    @objc func addToPush() {
-        let secondVC = SecondViewController()
-        secondVC.view.backgroundColor = .white
-        navigationController?.pushViewController(secondVC, animated: true)
     }
     
     @objc func deleteCell(sender: UIButton) {
@@ -77,23 +72,34 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         }
     }
     
+    @objc func addToPush() {
+        clickToUpdate = ""
+        let secondVC = SecondViewController()
+        secondVC.delegate = self
+        secondVC.view.backgroundColor = .white
+        navigationController?.pushViewController(secondVC, animated: true)
+    }
+    
     func clickToPush() {
-            let secondVC = SecondViewController()
-            secondVC.view.backgroundColor = .white
-//            secondVC.updateText = { [weak self] newText in
-//                guard let self = self else { return }
-//                self.textArray[rowSelected] = newText
-//                DispatchQueue.main.async {
-//                    self.tableView.reloadData()
-//                }
-//            }
-//            secondVC.textField.text = clickToUpdate
-            navigationController?.pushViewController(secondVC, animated: true)
+        let secondVC = SecondViewController()
+        secondVC.delegate = self
+        secondVC.view.backgroundColor = .white
+        secondVC.textField.text = clickToUpdate
+        navigationController?.pushViewController(secondVC, animated: true)
+    }
+    
+    func updateText(didGet text: String) {
+        if clickToUpdate.isEmpty {
+            textArray.append(text)
+        } else {
+            textArray[rowSelected] = text
         }
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
     
-    
-    
-
-
 }
+
+
 

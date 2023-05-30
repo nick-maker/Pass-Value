@@ -6,11 +6,11 @@
 //
 import UIKit
 
-class SecondViewController: UIViewController, UITextFieldDelegate {
+class SecondViewController: UIViewController, UITextFieldDelegate  {
     
-    private var textField = UITextField()
+    var textField = UITextField()
     private var button = UIButton()
-    var updateText: ((String) -> Void)?
+    weak var delegate: updateTextProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,10 +42,14 @@ class SecondViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func buttonTapped() {
-        updateText?(textField.text ?? "")
+        delegate?.updateText(didGet: textField.text ?? "")
         navigationController?.popViewController(animated: true)
     }
     
+}
+
+protocol updateTextProtocol: AnyObject {
     
+    func updateText(didGet text: String)
     
 }
