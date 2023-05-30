@@ -8,7 +8,7 @@ import UIKit
 
 class SecondViewController: UIViewController, UITextFieldDelegate {
     
-    private var textField = UITextField()
+    var textField = UITextField()
     private var button = UIButton()
     var updateText: ((String) -> Void)?
     
