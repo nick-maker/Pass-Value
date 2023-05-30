@@ -42,6 +42,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.dequeueReusableCell(withIdentifier: Cell.reuseIdentifier, for: indexPath) as? Cell else { fatalError("Cannot Downcasting") }
         cell.label.text = textArray[indexPath.row]
         cell.button.setTitle("Delete", for: .normal)
+        cell.button.addTarget(self, action: #selector(deleteCell), for: .touchUpInside)
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -51,14 +53,43 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     func setupNavigation() {
         
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(push))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addToPush))
     }
     
-    @objc func push() {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        clickToPush()
+    }
+    
+    @objc func addToPush() {
         let secondVC = SecondViewController()
         secondVC.view.backgroundColor = .white
         navigationController?.pushViewController(secondVC, animated: true)
     }
+    
+    @objc func deleteCell(sender: UIButton) {
+        let point = sender.convert(CGPoint.zero, to: tableView)
+        guard let indexPath = tableView.indexPathForRow(at: point) else { return }
+        
+        textArray.remove(at: indexPath.row)
+        
+        DispatchQueue.main.async {
+            self.tableView.reloadData()
+        }
+    }
+    
+    func clickToPush() {
+            let secondVC = SecondViewController()
+            secondVC.view.backgroundColor = .white
+//            secondVC.updateText = { [weak self] newText in
+//                guard let self = self else { return }
+//                self.textArray[rowSelected] = newText
+//                DispatchQueue.main.async {
+//                    self.tableView.reloadData()
+//                }
+//            }
+//            secondVC.textField.text = clickToUpdate
+            navigationController?.pushViewController(secondVC, animated: true)
+        }
     
     
     
