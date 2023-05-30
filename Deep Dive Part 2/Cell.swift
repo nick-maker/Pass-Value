@@ -16,11 +16,14 @@ class Cell: UITableViewCell {
         return label
     }()
     
-    var button: UIButton = {
+    let button: UIButton = {
         let button = UIButton()
         button.setTitleColor(.systemRed, for: .normal)
+        
         return button
     }()
+    
+    var onDelete: (() -> Void)?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -34,12 +37,17 @@ class Cell: UITableViewCell {
             
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             button.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
-        ])
 
+        ])
+        button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    @objc func deleteButtonTapped() {
+        onDelete?()
     }
     
 }
