@@ -12,12 +12,13 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     var tableView: UITableView = {
         let tableView = UITableView()
         tableView.estimatedRowHeight = UITableView.automaticDimension
-        tableView.rowHeight = UITableView.automaticDimension        
+        tableView.rowHeight = UITableView.automaticDimension
         return tableView
     }()
     
     var textArray = ["2", "3", "4", "5"]
-   
+    var clickToUpdate = ""
+    var rowSelected = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +43,7 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         cell.label.text = textArray[indexPath.row]
         cell.button.setTitle("Delete", for: .normal)
         cell.delegate = self
+        cell.selectionStyle = .none
         return cell
     }
     
@@ -49,11 +51,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         textArray.count
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//           rowSelected = indexPath.row
-//           clickToUpdate = textArray[indexPath.row]
-//           clickToPush()
-//       }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        rowSelected = indexPath.row
+        clickToUpdate = textArray[indexPath.row]
+        clickToPush()
+    }
     
     func setupNavigation() {
         
@@ -63,23 +65,36 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     @objc func addToPush() {
         let secondVC = SecondViewController()
         secondVC.view.backgroundColor = .white
+        secondVC.updateText = { [weak self] newText in
+            guard let self = self else { return }
+            self.textArray.append(newText)
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
         navigationController?.pushViewController(secondVC, animated: true)
     }
     
-    func deleteCell(at indexPath: IndexPath) {
-        textArray.remove(at: indexPath.row)
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
+    func clickToPush() {
+        let secondVC = SecondViewController()
+        secondVC.view.backgroundColor = .white
+        secondVC.updateText = { [weak self] newText in
+            guard let self = self else { return }
+            self.textArray[rowSelected] = newText
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
+        secondVC.textField.text = clickToUpdate
+        navigationController?.pushViewController(secondVC, animated: true)
     }
     
     func deleteCell(cell: Cell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         textArray.remove(at: indexPath.row)
         tableView.reloadData()
-        
     }
-
-
+    
+    
 }
 
